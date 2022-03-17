@@ -11,3 +11,21 @@
 .small-text {
     font-size: small
 }
+
+@media only screen and (min-width: 1824px) {
+    .searchInput, .searchSuggestions {
+        width: 75%;
+    }
+}
+
+@media (max-width: 640px) {
+    .searchInput, .searchSuggestions {
+        width: 95%;
+    }
+}
+
+@media (min-width: 1008px) {
+    .searchInput, .searchSuggestions {
+        width: 75%;
+    }
+}

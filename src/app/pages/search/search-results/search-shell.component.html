@@ -1,12 +1,12 @@
 <div class="header py-2">
     <div class="d-flex justify-content-center align-self-center mp-5">
-        <div [routerLink]="'/'" style="cursor: pointer; position: relative;" class="text-center px-3 me-auto align-self-center">
+        <div [routerLink]="'/'" style="cursor: pointer; position: relative;" class="logo-panel text-center px-3 me-auto align-self-center">
            <div class=" align-self-center" [style.fontSize]="'24px'">
-               <i class="fab fa-github mx-2 align-self-center text-black"></i>
-               <span class="align-self-center text-black"  >Search</span>
+               <i class="logo-icon fab fa-github mx-2 align-self-center text-black"></i>
+               <span class="logo-text align-self-center text-black"  >Search</span>
             </div>
         </div>
-        <div class="p-input-icon-left form-group flex-grow-1 align-self-center ms-5">
+        <div class="p-input-icon-left form-group flex-grow-1 align-self-center searchInput">
             <i class="pi pi-search"></i>
             <input type="text" (keyup)="DoSearch($event)" class="form-control p-inputtext-sm" [(ngModel)]="queryString"  pInputText />
             <div style="position: absolute; width: 100%; z-index: 2000;">
