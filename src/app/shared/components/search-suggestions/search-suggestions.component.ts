@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { GHSearchService } from '../../services/github/gh-search.service';
 
@@ -15,7 +16,7 @@ export class SearchSuggestionsComponent implements OnInit, OnChanges, OnDestroy 
   @Input() searchStr!: string;
   @Input() showSuggestions: boolean = true;
 
-  constructor(private searchSvc: GHSearchService) { }
+  constructor(private searchSvc: GHSearchService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -44,6 +45,10 @@ export class SearchSuggestionsComponent implements OnInit, OnChanges, OnDestroy 
     }, (ex: any) => {
       if (!this.searchStr.length) { this.results= []; }
     });
+  }
+
+  FollowSuggestion(evt: any) {
+    this.router.navigate(['/search'], { queryParams: {q: evt.option.login} });
   }
 
 
