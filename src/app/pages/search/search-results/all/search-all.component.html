@@ -1,1 +1,40 @@
-<p>all works!</p>
+<div>
+    <p-dataView [value]="searchResults">
+        <ng-template let-result let-index="rowIndex" pTemplate="listItem">
+            <div class="mx-3 d-flex flex-column">
+                <a [href]="result.html_url" target="_blank"><small>{{ result.html_url }}</small></a>
+                <div>
+                    <span class="badge bg-light text-dark"><small>{{ result.type | lowercase }}</small></span>: <span>
+                        <img class="avatar" src="{{ result.avatar_url }}" height="50" alt="avatar"> {{ result.login }}</span>
+                </div>
+                
+                <a *ngIf="!loadingSummary.loading" href="javascript:void(0)" class="my-2" (click)="ToggleSummary(result, index)">
+                    <small><span *ngIf="!result.showSummary"> <i class="fa fa-eye"></i> View </span>
+                    <span *ngIf="result.showSummary"> <i class="fa fa-eye-slash"></i> Hide </span>
+                    <span>Summary</span></small>
+                </a>
+                <div *ngIf="loadingSummary.index == index && loadingSummary.loading">
+                    <i class="fa fa-spinner fa-spin"></i> <small> Please wait...</small>
+                </div>
+                <ng-container *ngIf="result.showSummary && !loadingSummary.loading && result.summary" 
+                [ngTemplateOutlet]="userSummary"
+                [ngTemplateOutletContext]="{ result}"
+                >
+                </ng-container>
+                
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>
+
+<ng-template #userSummary  let-result="result">
+    <div class="small-text">
+        Repos: <span> {{ result.summary.repos }} </span> <a [href]="result.repos_url" target="_blank"> View <i class="fa fa-external-link-alt"></i></a>
+    </div>
+    <div class="small-text">
+        Followers: <span> {{ result.summary.followers }} </span> <a [href]="result.followers_url" target="_blank"> View <i class="fa fa-external-link-alt"></i></a>
+    </div>
+    <div class="small-text">
+        Subscriptions: <span> {{ result.summary.subscriptions }} </span> <a [href]="result.subscriptions_url" target="_blank"> View <i class="fa fa-external-link-alt"></i></a>
+    </div>
+</ng-template>

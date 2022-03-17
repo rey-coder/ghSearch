@@ -8,6 +8,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { SearchSuggestionsModule } from './shared/components/search-suggestions/search-suggestions.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule, InputTextModule,
     FormsModule, SearchSuggestionsModule,
-    HttpClientModule
+    HttpClientModule, ToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

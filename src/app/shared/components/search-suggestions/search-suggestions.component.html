@@ -1,2 +1,2 @@
 
-<p-listbox *ngIf="results.length" [style]="{fontSize: 'small'}" [options]="results" optionLabel="login"></p-listbox>
+<p-listbox *ngIf="results.length && showSuggestions" [style]="{fontSize: 'small'}" [options]="results" optionLabel="login"></p-listbox>

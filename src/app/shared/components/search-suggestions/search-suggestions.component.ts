@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GHSearchService } from '../../services/github/gh-search.service';
 
@@ -7,12 +7,13 @@ import { GHSearchService } from '../../services/github/gh-search.service';
   templateUrl: './search-suggestions.component.html',
   styleUrls: ['./search-suggestions.component.scss']
 })
-export class SearchSuggestionsComponent implements OnInit, OnChanges {
+export class SearchSuggestionsComponent implements OnInit, OnChanges, OnDestroy {
 
   private searchSubject?: Subscription;
   results: any[] = [];
 
   @Input() searchStr!: string;
+  @Input() showSuggestions: boolean = true;
 
   constructor(private searchSvc: GHSearchService) { }
 
@@ -26,6 +27,12 @@ export class SearchSuggestionsComponent implements OnInit, OnChanges {
       }
   }
 
+  ngOnDestroy(): void {
+    if (this.searchSubject !== undefined && !this.searchSubject.closed) {
+      this.searchSubject?.unsubscribe();
+    }
+  }
+
   FetchSuggestions() {
     if (this.searchSubject !== undefined && !this.searchSubject.closed) {
       this.searchSubject?.unsubscribe();
@@ -36,7 +43,6 @@ export class SearchSuggestionsComponent implements OnInit, OnChanges {
       this.results = res.items;
     }, (ex: any) => {
       if (!this.searchStr.length) { this.results= []; }
-      // console.log(ex);
     });
   }
 
