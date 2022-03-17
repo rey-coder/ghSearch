@@ -8,7 +8,7 @@
         </div>
         <div class="p-input-icon-left form-group flex-grow-1 align-self-center ms-5">
             <i class="pi pi-search"></i>
-            <input type="text" (keypress)="DoSearch($event)" class="form-control p-inputtext-sm" [(ngModel)]="queryString"  pInputText />
+            <input type="text" (keyup)="DoSearch($event)" class="form-control p-inputtext-sm" [(ngModel)]="queryString"  pInputText />
             <div style="position: absolute; width: 100%; z-index: 2000;">
                 <app-search-suggestions [searchStr]="queryString" [showSuggestions]="!searchResults.length"></app-search-suggestions>
             </div>
